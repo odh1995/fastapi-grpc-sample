@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package sendtext;
+
+service SendText{
+    rpc Send(Text) returns (SendResponse);
+}
+
+message Text{
+    string text = 1;
+}
+
+message SendResponse{
+    bool sucess = 1;
+}
