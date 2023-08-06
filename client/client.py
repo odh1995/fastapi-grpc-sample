@@ -29,7 +29,7 @@ async def upload_file_grpc(file: UploadFile = File(...)):
     start_time = time.time()
     success = upload_file_with_grpc(content)
     if success:
-        print(time.time() - start_time)
+        print(f"Sending file using gRPC speed: {time.time() - start_time}")
         return {"message": f"File {file.filename} has been uploaded."}
     else:
         return {"message": "Failed to upload the file."}
@@ -42,7 +42,7 @@ async def upload_file_rest(file: UploadFile = File(...)):
     start_time = time.time()
     response = requests.post(server_url, files=files, headers=headers)
     if response.status_code == 200:
-        print(time.time() - start_time)
+        print(f"Sending file using Rest speed: {time.time() - start_time}")
         return response.json()
     else:
         print(response)
@@ -53,7 +53,7 @@ async def send_text_grpc(text: str):
     start_time = time.time()
     success = send_text_with_grpc(text)
     if success:
-        print(time.time() - start_time)
+        print(f"Sending text using gRPC speed:{time.time() - start_time}")
         return {"message": f"Text received!"} 
     else:
         return {"message": f"Failed to send text"} 
@@ -64,7 +64,7 @@ async def send_text_rest(text: str):
     start_time = time.time()
     response = requests.post(server_url, params={"text": text}, headers=headers)
     if response.status_code == 200:
-        print(time.time() - start_time)
+        print(f"Sending text using Rest speed: {time.time() - start_time}")
         return response.json()
     else:
         print(response)
